@@ -1,0 +1,6 @@
+server\data\validation\InputValidator.class
+server\servlet\ControllerServlet.class
+server\data\Result.class
+server\data\validation\ClickValidator.class
+server\data\validation\Validator.class
+server\servlet\AreaCheckServlet.class
