@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -42,8 +43,15 @@ public class AreaCheckServlet extends HttpServlet {
             ctx.setAttribute("table", table);
             out.println(result);
         }else{
-            out.println("Ошибка введённых данных");
-            resp.sendError(403);
+            float x = Float.parseFloat(reqX);
+            float y = Float.parseFloat(reqY);
+            float r = Float.parseFloat(reqR);
+            long execTime = (System.nanoTime() - start)/1000;
+            Result result = new Result(x,y,r, currentTime, execTime, false);
+            table.add(result);
+            ctx.setAttribute("table", table);
+            out.println(result);
+            //resp.sendError(403);
         }
     }
     private boolean checkHit(float x, float y, float r){
