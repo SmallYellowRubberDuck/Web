@@ -1,17 +1,18 @@
 package server.data;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Result {
-    public float x;
+    public BigDecimal x;
     public float y;
     public  float r;
     public String time;
     public long execTime;
     public boolean hit;
 
-    public Result(float x, float y, float r, String time, long execTime, boolean hit){
+    public Result(BigDecimal x, float y, float r, String time, long execTime, boolean hit){
         this.x = x;
         this.y = y;
         this.r = r;

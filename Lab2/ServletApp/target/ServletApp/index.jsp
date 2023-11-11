@@ -12,9 +12,9 @@
 <body>
 <div id="container" class="margin">
     <div id="header" class="container margin">
-        <p>Labwork 1 </p>
+        <p>Labwork 2 </p>
         <p>Gordeev Stepan Evgenevich, P3220</p>
-        <p>Variant 3001</p>
+        <p>Variant 223307</p>
     </div>
     <div id="main" class="margin">
         <div id="choiceregion" class="container margin">
@@ -25,7 +25,7 @@
                     <label for="x-select">Enter X:</label>
                     <div id="x-select-input" class="select-input-container">
                         <span class="error" aria-live="polite" id="xError"></span>
-                        <input type="text" onkeyup="this.value = this.value.replace(/[,]/g,'.');this.value = this.value.replace(/[^\d,^.,^-]/g,''); localStorage.setItem('x',this.value)" name="x-select" id="x-select" class="input-select"
+                        <input type="text" onkeyup="this.value = this.value.replace(/[^\d,^.,^-]/g,''); localStorage.setItem('x',this.value)" name="x-select" id="x-select" class="input-select"
                                placeholder="Number between -3 and 5   " required />
                     </div>
                 </div>
@@ -83,11 +83,6 @@
                 <%
                     ServletContext ctx = config.getServletContext();
                     ArrayList<Result> history = (ArrayList<Result>) ctx.getAttribute("table");
-                    Gson gson = new Gson();
-                    String historyInJson = "[]";
-                    if (history != null && !history.isEmpty()) {
-                        historyInJson = gson.toJson(history);
-                    }
                 %>
 
                 </thead>
@@ -105,10 +100,11 @@
 <script src="scripts/sender.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        myHistory = <%= historyInJson %>;
+        myHistory[String] = <%= history %>;
         for(let result of myHistory){
             points.push([result.x, result.y, result.r]);
             addToTable(result.x, result.y, result.r, result.hit);
+            console.log(result);
         }
     });
 </script>

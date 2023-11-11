@@ -7,6 +7,7 @@ const r_cells = document.querySelectorAll('input[name="r-select"]');
 const y_cells = document.querySelectorAll('input[name="y-select"]');
 const allError = document.getElementById("allError");
 const graph = document.getElementById("graph")
+//TODO ФИКСАНУТЬ ПРОБЛЕМУ ОКРУГЛЕНИЯ ПРИ ЗАГРУЗКЕ JSP
 
 function newR(newR){
     drawShapesByR(newR);
@@ -34,7 +35,7 @@ r_select.addEventListener("change", function (e){
     newR(e.target.value);
 });
 form.addEventListener("submit", (event) => {
-    const x = x_select.value;
+    const x =  x_select.value.replace(/[,]/g,'.');
     event.preventDefault();
 
     const isValidX = !Number.isNaN(x);
@@ -57,7 +58,7 @@ form.addEventListener("submit", (event) => {
         allError.textContent = "";
         allError.className = "error";
         // drawPoint(x, y, r);
-        sendValues(parseFloat(x), parseFloat(y), parseFloat(r), "input");
+        sendValues(x, parseFloat(y), parseFloat(r), "input");
     }
 });
 
@@ -67,5 +68,5 @@ canvas.addEventListener("click",function (event){
     let xy = canvasToAxesCoordinates(relativeX, relativeY, canvas);
     let x_click = xy["x"];
     let y_click = xy["y"];
-    sendValues(parseFloat(x_click), parseFloat(y_click), parseFloat(r), "click");
+    sendValues(x_click, parseFloat(y_click), parseFloat(r), "click");
 });

@@ -279,7 +279,7 @@ th, td {
     padding: 3px;
 }
 .thX,.thY{
-    width: 13ex;
+    width: fit-content;
 }
 .thR{
     width: 4ex;

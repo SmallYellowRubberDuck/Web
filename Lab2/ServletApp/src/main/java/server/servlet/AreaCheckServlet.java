@@ -32,7 +32,7 @@ public class AreaCheckServlet extends HttpServlet {
         resp.setContentType("text/plain;charset=UTF-8");
         ServletContext ctx = getServletContext();
         if (correct(reqX, reqY, reqR, reqType)){
-            float x = Float.parseFloat(reqX);
+            BigDecimal x = new BigDecimal(reqX);
             float y = Float.parseFloat(reqY);
             float r = Float.parseFloat(reqR);
 
@@ -43,7 +43,7 @@ public class AreaCheckServlet extends HttpServlet {
             ctx.setAttribute("table", table);
             out.println(result);
         }else{
-            float x = Float.parseFloat(reqX);
+            BigDecimal x = new BigDecimal(reqX);
             float y = Float.parseFloat(reqY);
             float r = Float.parseFloat(reqR);
             long execTime = (System.nanoTime() - start)/1000;
@@ -54,19 +54,19 @@ public class AreaCheckServlet extends HttpServlet {
             //resp.sendError(403);
         }
     }
-    private boolean checkHit(float x, float y, float r){
+    private boolean checkHit(BigDecimal x, float y, float r){
         return firstQuarter(x,y,r)||secondQuarter(x,y,r)||thirdQuarter(x,y,r)||forthQuarter(x,y,r);
     }
-    private boolean firstQuarter(float x, float y, float r){
-        return x>=0&&y>=0&&x<=r&&y<=r/2;
+    private boolean firstQuarter(BigDecimal x, float y, float r){
+        return x.compareTo(new BigDecimal(0))>=0&&y>=0&&x.compareTo(new BigDecimal(r))<=0&&y<=r/2;
     }
-    private boolean secondQuarter(float x, float y, float r){
-        return x<=0&&y>=0&&(x*x+y*y<=r*r/4);
+    private boolean secondQuarter(BigDecimal x, float y, float r){
+        return x.compareTo(new BigDecimal(0))<=0&&y>=0&&(x.multiply(x).add(new BigDecimal(y*y)).compareTo(new BigDecimal(r*r/4))<=0);
     }
-    private boolean thirdQuarter(float x, float y, float r){
+    private boolean thirdQuarter(BigDecimal x, float y, float r){
         return false;
     }
-    private boolean forthQuarter(float x, float y, float r){
-        return x>=0&&y<=0&&(y-x>=-r/2);
+    private boolean forthQuarter(BigDecimal x, float y, float r){
+        return x.compareTo(new BigDecimal(0))>=0&&y<=0&&((new BigDecimal(y).add(x.negate())).compareTo(new BigDecimal(r/2).negate())>=0);
     }
 }

@@ -32,11 +32,11 @@
                 <%
                     ServletContext ctx = config.getServletContext();
                     ArrayList<Result> history = (ArrayList<Result>) ctx.getAttribute("table");
-                    Gson gson = new Gson();
-                    String historyInJson = "[]";
-                    if (history != null && !history.isEmpty()) {
-                        historyInJson = gson.toJson(history);
-                    }
+//                    Gson gson = new Gson();
+//                    String historyInJson = "[]";
+//                    if (history != null && !history.isEmpty()) {
+//                        historyInJson = gson.toJson(history);
+//                    }
                 %>
 
                 </thead>
@@ -51,8 +51,9 @@
 <script src="scripts/history.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        myHistory = <%= historyInJson %>;
+        myHistory = <%= history %>;
         for(let result of myHistory){
+            console.log(result);
             addToFullTable(result.x, result.y, result.r, result.hit, result.time, result.execTime);
         }
     });

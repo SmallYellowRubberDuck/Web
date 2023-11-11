@@ -20,10 +20,12 @@ async function sendValues(x, y, r, type) {
         }
         else {
             const json = await response.json();
-            addToTable(json.x, json.y, json.r, json.hit);
-            let dot = [json.x, json.y, json.r];
+            addToTable(x, json.y, json.r, json.hit);
+            let dot = [x, json.y, json.r];
             points.push(dot);
-            drawPoint(json.x,json.y,json.r);
+            // console.log(x);
+            // console.log(json.x);
+            drawPoint(x,json.y,json.r);
         }
     }
 

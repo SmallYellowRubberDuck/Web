@@ -3,7 +3,6 @@ package server.servlet;
 
 import server.data.Result;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class ControllerServlet extends HttpServlet {
@@ -37,6 +35,7 @@ public class ControllerServlet extends HttpServlet {
                             (!r.trim().isEmpty()) &&
                             (!type.trim().isEmpty()))){
                 req.getRequestDispatcher("/area-checker").forward(req, resp);
+                System.out.println(table);
                 }
             case "click":
                 x = req.getParameter("x");

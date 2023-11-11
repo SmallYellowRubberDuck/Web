@@ -11,7 +11,7 @@
 let serverError = document.getElementById("server-error");
 window.addEventListener("load", () => {
 
-    const savedX = JSON.parse(localStorage.getItem("x")) || "";
+    const savedX = (localStorage.getItem("x")) || "";
     const savedY = JSON.parse(localStorage.getItem("y")) || "";
     const savedR = JSON.parse(localStorage.getItem("r")) || "";
 
