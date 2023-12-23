@@ -1,0 +1,160 @@
+/* Установка белого фона для всего документа */
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для контейнеров с классом "container" */
+.container {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+/* Стили для формы и элементов формы */
+#input-form {
+    border: none;
+}
+
+#x-container, #y-container, #r-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+label {
+    /*display: inline-block;*/
+    width: 30px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+
+#graphic-table {
+    width: 80%;
+    max-width: 1000px;
+    height: auto;
+    margin:  0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+#graphic-overlay-column{
+    width: 70%;
+}
+
+/* Стили для графика и таблицы истории */
+#graphic-container {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+
+#graphic {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 1;
+}
+
+#r-graphic-column{
+    width: 30%;
+    text-align: center;
+    position: relative;
+}
+
+#history {
+    background-color: white;
+    border: 1px solid black;
+    margin: 10px;
+    border-collapse: collapse;
+}
+
+label[for="r-graphic"] {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Стили для таблицы истории */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+
+
+
+/* Стили для r-value label и show-r-value */
+#r-container {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+}
+
+#show-r-value {
+    margin-left: 5px;
+}
+
+#x-value, #y-value, #r-value {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+#info-box {
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 2px;
+    border: 1px solid #ccc;
+    font-size: 6px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+
+circle{
+    z-index: 4;
+    pointer-events: visible
+}
+
+
+circle:hover {
+    cursor: pointer;
+}
+
+.error{
+    width: auto;
+    color: red;
+    margin-left: 5px;
+}

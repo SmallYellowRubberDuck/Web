@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <h:outputStylesheet library="css" name="main.css"/>
+
+    <h:outputScript library="js" name="cleaner.js"/>
+    <h:outputScript library="js" name="click.js"/>
+    <h:outputScript library="js" name="infoAboutPoints.js"/>
+    <h:outputScript library="js" name="pointHandler.js"/>
+    <h:outputScript library="js" name="updateR.js"/>
+    <title>Main</title>
+</h:head>
+<h:body>
+    <h:link outcome="start.xhtml" value="Start page" />
+    <h:form id="input-form">
+        <div class="container" id="x-container">
+            <label>x:</label>
+            <h:selectOneRadio id="x-value" value="#{resultBean.newResult.x}" required="true">
+                <f:selectItem itemValue="-3" itemLabel="-3" />
+                <f:selectItem itemValue="-2" itemLabel="-2" />
+                <f:selectItem itemValue="-1" itemLabel="-1" />
+                <f:selectItem itemValue="0" itemLabel="0" />
+                <f:selectItem itemValue="1" itemLabel="1" />
+                <f:selectItem itemValue="2" itemLabel="2" />
+                <f:selectItem itemValue="3" itemLabel="3" />
+                <f:selectItem itemValue="4" itemLabel="4" />
+                <f:selectItem itemValue="5" itemLabel="5" />
+            </h:selectOneRadio>
+        </div>
+        <div class="container" id="y-container">
+            <label>y:</label>
+            <h:inputText id="y-value" placeholder="(-5; 3)" value="#{resultBean.newResult.y}" required="true" maxlength="6"> </h:inputText>
+            <label class="error" id="y-error"> </label>
+        </div>
+        <div class="container" id="r-container">
+            <label>r:</label>
+            <ace:sliderEntry id="r-value" min="1" max="4" stepPercent="16.66666666666666666" value="#{resultBean.newResult.r}" onSlideEnd="updateR()"/>
+            <label id="show-r-value">1</label>
+        </div>
+        <h:commandButton value="Submit" action="#{resultBean.addResult('SUBMIT')}" update="history" id="submit-button">
+        </h:commandButton>
+    </h:form>
+
+    <h:form id="clear-form">
+        <h:commandButton value="Clear" action="#{resultBean.clearResults()}" update="history" id="clear-button">
+        </h:commandButton>
+    </h:form>
+
+
+    <h:form id="click-form" style="display: none">
+        <h:inputText id="x-click-value" value="#{resultBean.newResult.x}" required="true" maxlength="6"> </h:inputText>
+        <h:inputText id="y-click-value" value="#{resultBean.newResult.y}" required="true" maxlength="6"> </h:inputText>
+        <h:inputText id="r-click-value" value="#{resultBean.newResult.r}" required="true" maxlength="6"> </h:inputText>
+        <h:commandButton value="Submit" action="#{resultBean.addResult('CLICK')}" update="history" id="submit-click-button">
+        </h:commandButton>
+    </h:form>
+
+
+    <h:panelGroup>
+        <table id="graphic-table">
+            <tr>
+                <td colspan="2"> </td>
+            </tr>
+            <tr>
+                <td id="graphic-overlay-column">
+                    <div id="graphic-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="overlay"> </svg>
+                        <img src="resources/img/Lab3.svg" alt="Graphic" id="graphic"> </img>
+                    </div>
+                    <div id="info-box"> </div>
+                </td>
+                <td id="r-graphic-column">
+                    <label>R of graphic:</label>
+                    <label id="show-r-graphic">1</label>
+                </td>
+            </tr>
+        </table>
+    </h:panelGroup>
+
+
+    <h:panelGroup id="history">
+        <table>
+            <thead>
+            <tr>
+                <th>x</th>
+                <th>y</th>
+                <th>r</th>
+                <th>time</th>
+                <th>execution time</th>
+                <th>hit</th>
+            </tr>
+            </thead>
+            <tbody id="history-table">
+            <ui:repeat value="#{resultBean.resultList}" var="result">
+                <tr>
+                    <td>#{result.x}</td>
+                    <td>#{result.y}</td>
+                    <td>#{result.r}</td>
+                    <td>#{result.currentTime}</td>
+                    <td>#{result.executionTime}</td>
+                    <td>#{result.hit}</td>
+                </tr>
+            </ui:repeat>
+            </tbody>
+        </table>
+    </h:panelGroup>
+
+
+</h:body>
+</html>
